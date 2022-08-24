@@ -16,18 +16,17 @@
 
 #include <sys/types.h>
 
-#include "main.h"
+#ifndef AO_MAIN_H
+#define AO_MAIN_H 1
 
-char *AO_execfile;
-char *AO_configfile;
-char *AO_worldfile;
+#define AO_VERSION 1
+#define AO_SUBVERSION 0
 
-ssize_t AO_x, AO_y, AO_z;
-ssize_t AO_chunk_x, AO_chunk_y, AO_chunk_z; 
+extern char *AO_execfile;
+extern char *AO_configfile;
+extern char *AO_worldfile;
 
-int main(int argc, char **argv) {
-        AO_execfile = argv[0];
-        (void) argc;
+extern ssize_t AO_x, AO_y, AO_z;
+extern ssize_t AO_chunk_x, AO_chunk_y, AO_chunk_z; 
 
-        return 0;
-}
+#endif

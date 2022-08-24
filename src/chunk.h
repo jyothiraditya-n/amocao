@@ -14,20 +14,35 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <https://www.gnu.org/licenses/>. */
 
+#include <stddef.h>
+#include <stdint.h>
+
 #include <sys/types.h>
 
-#include "main.h"
+#include "block.h"
 
-char *AO_execfile;
-char *AO_configfile;
-char *AO_worldfile;
+#ifndef AO_CHUNK_H
+#define AO_CHUNK_H 1
 
-ssize_t AO_x, AO_y, AO_z;
-ssize_t AO_chunk_x, AO_chunk_y, AO_chunk_z; 
+typedef struct AOc_s {
+	struct AOc_s *front, *back;
+	struct AOc_s *left, *right;
+	struct AOc_s *top, *bottom;
 
-int main(int argc, char **argv) {
-        AO_execfile = argv[0];
-        (void) argc;
+	ssize_t x, y, z;
 
-        return 0;
-}
+	AOb_t blocks[4096];
+	AOb_data_t data[4096];
+
+} AOc_t;
+
+extern AOc_t *AOc_chunks;
+extern ssize_t AOc_radius;
+
+extern void AOc_init();
+extern AOc_t *AOc_get(ssize_t x, ssize_t y, ssize_t z);
+
+extern void AOc_read(AOc_t *chunk);
+extern void AOc_save(AOc_t *chunk);
+
+#endif

@@ -14,20 +14,13 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <https://www.gnu.org/licenses/>. */
 
-#include <sys/types.h>
+#ifndef AO_ERRORS_H
+#define AO_ERRORS_H 1
 
-#include "main.h"
+#define AOE_UNKNOWN_ERROR 0
+#define AOE_CORRUPT_WORLD 1
+#define AOE_OUTDATED_WORLD 2
 
-char *AO_execfile;
-char *AO_configfile;
-char *AO_worldfile;
+extern void AOe_report_err(int errnum);
 
-ssize_t AO_x, AO_y, AO_z;
-ssize_t AO_chunk_x, AO_chunk_y, AO_chunk_z; 
-
-int main(int argc, char **argv) {
-        AO_execfile = argv[0];
-        (void) argc;
-
-        return 0;
-}
+#endif

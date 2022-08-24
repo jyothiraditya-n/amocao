@@ -1,5 +1,5 @@
 # Amacao: A Mind of Order & Chaos
-# Copyright (C) 2021-2022 Jyothiraditya Nellakra
+# Copyright (C) 2022 Jyothiraditya Nellakra
 #
 # This program is free software: you can redistribute it and/or modify it under
 # the terms of the GNU General Public License as published by the Free Software
@@ -25,7 +25,7 @@ CC = gcc
 AS = as
 LD = ld
 
-CPPFLAGS += -Wall -Wextra -Wpedantic -std=gnu17 -O3
+CPPFLAGS += -Wall -Wextra -std=gnu17 -O3
 CPPFLAGS += -I libClame/inc/ -I libScricon/inc/
 CFLAGS += -std=gnu17 -O3 -s
 

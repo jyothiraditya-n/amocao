@@ -14,20 +14,27 @@
  * You should have received a copy of the GNU General Public License along with
  * this program. If not, see <https://www.gnu.org/licenses/>. */
 
-#include <sys/types.h>
+#include <stdio.h>
+#include <stdlib.h>
 
+#include "error.h"
 #include "main.h"
 
-char *AO_execfile;
-char *AO_configfile;
-char *AO_worldfile;
+void AOe_report_err(int errnum) {
+	switch(errnum) {
+	case AOE_CORRUPT_WORLD:
+		fprintf(stderr, "%s: error: corrupt world file '%s'.\n",
+			AO_execfile, AO_worldfile);
+		exit(errnum);
 
-ssize_t AO_x, AO_y, AO_z;
-ssize_t AO_chunk_x, AO_chunk_y, AO_chunk_z; 
+	case AOE_OUTDATED_WORLD:
+		fprintf(stderr, "%s: error: outdated world file format for "
+			"file '%s'.\n", AO_execfile, AO_worldfile);
+		exit(errnum);
 
-int main(int argc, char **argv) {
-        AO_execfile = argv[0];
-        (void) argc;
-
-        return 0;
+	default:
+		fprintf(stderr, "%s: error: unknown error\n", AO_execfile);
+		perror("cstdlib");
+		exit(errnum);
+	}
 }
